@@ -14,8 +14,6 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 final String frontendUrl = "https://oauthpoc.netlify.app";
-    @Value("${frontend.url}")
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
