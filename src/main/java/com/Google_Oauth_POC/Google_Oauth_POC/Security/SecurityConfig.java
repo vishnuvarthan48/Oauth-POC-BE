@@ -13,9 +13,8 @@ import java.util.List;
 
 @Configuration
 public class SecurityConfig {
-
+private String frontendUrl = "https://oauthpoc.netlify.app";
     @Value("${frontend.url}")
-    private String frontEndUrl;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -28,11 +27,11 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth -> oauth
-                        .defaultSuccessUrl(frontEndUrl +"/home", true)
+                        .defaultSuccessUrl(frontendUrl +"/home", true)
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl(frontEndUrl)
+                        .logoutSuccessUrl(frontendUrl)
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                 );
@@ -46,7 +45,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(List.of(
-                frontEndUrl
+                frontendUrl
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
