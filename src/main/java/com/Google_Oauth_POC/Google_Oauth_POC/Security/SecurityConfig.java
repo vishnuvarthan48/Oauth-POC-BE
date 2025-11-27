@@ -28,7 +28,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth -> oauth
-                        .defaultSuccessUrl(frontEndUrl +"home", true)
+                        .defaultSuccessUrl(frontEndUrl +"/home", true)
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
