@@ -13,7 +13,7 @@ import java.util.List;
 
 @Configuration
 public class SecurityConfig {
-private String frontendUrl = "https://oauthpoc.netlify.app";
+final String frontendUrl = "https://oauthpoc.netlify.app";
     @Value("${frontend.url}")
 
     @Bean
