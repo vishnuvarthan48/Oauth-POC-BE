@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
-    @GetMapping("/home")
+    @GetMapping("/")
     public String homePage(){
-        return "Hello, welcome home";
+        return "Hello, welcome home, Backend is running";
     }
 }

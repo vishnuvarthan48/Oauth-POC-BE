@@ -1,5 +1,6 @@
 package com.Google_Oauth_POC.Google_Oauth_POC.Security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,9 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
+    @Value("${frontend.url}")
+    private String frontEndUrl;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -24,11 +28,11 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth -> oauth
-                        .defaultSuccessUrl("http://localhost:5173/home", true)
+                        .defaultSuccessUrl(frontEndUrl +"home", true)
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("http://localhost:5173")
+                        .logoutSuccessUrl(frontEndUrl)
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                 );
@@ -42,7 +46,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(List.of(
-                "http://localhost:5173"
+                frontEndUrl
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
